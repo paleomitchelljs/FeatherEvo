@@ -1,0 +1,53 @@
+﻿Taxon,flighted,clade,max_age,pair
+Tinamus major saturatus,1,Palaeognathae,,
+Dryolimnas cuvieri,1,Gruiformes,,10
+Crex crex,1,Gruiformes,,
+Himantornis haematopus,1,Gruiformes,,
+Fulica gigantea,0,Gruiformes,2869100,1
+Fulica armillata,1,Gruiformes,,1
+Gallirallus australis,0,Gruiformes,7241700,
+Strigops habroptilus,0,Psittaciformes,28500000,2
+Nestor notabilis,1,Psittaciformes,,2
+Gallirallus striatus,1,Gruiformes,,
+Atlantisia rogersi,0,Gruiformes,1500000,14
+Nesoclopeus woodfordi,0,Gruiformes,1629400,
+Alca torda,1,Charadriiformes,,9
+Struthio camelus,0,Palaeognathae,79580000,
+Dromaius novaehollandiae,0,Palaeognathae,66690000,
+Rhea americana intermedia,0,Palaeognathae,70620000,
+Apteryx australis,0,Palaeognathae,62010000,
+Anas aucklandica,0,Anseriformes,730000,3
+Anas chlorotis,1,Anseriformes,,3
+Tachyeres pteneres,0,Anseriformes,15000,4
+Tachyeres patachonicus,1,Anseriformes,,4
+Rollandia microptera,0,Podicipediformes,1000000,5
+Rollandia rolland,1,Podicipediformes,,5
+Phalacrocorax harrisi,0,Suliformes,2370000,6
+Phalacrocorax auritus,1,Suliformes,,6
+Oceanites oceanicus,1,Procellariiformes,,
+Pelecanoides urinatrix,1,Procellariiformes,,
+Diomedea immutabilis,1,Procellariiformes,,
+Casuarius unappendiculatus,0,Palaeognathae,66690000,
+Spheniscus demersus,0,Sphenisciformes,61050000,
+Eudyptes chrysocome crestatus,0,Sphenisciformes,61050000,
+Aptenodytes forsteri,0,Sphenisciformes,61050000,
+Mergus australis,1,Anseriformes,,
+Porzana sandwichensis,0,Gruiformes,430000,
+Porzana palmeri,0,Gruiformes,125000,
+Gallinula nesiotis,0,Gruiformes,,
+Xenicus lyalli,0,Passeriformes,32900000,11
+Megacrex inepta,0,Gruiformes,16660500,
+Porzana spiloptera,1,Gruiformes,,14
+Gallinula mortierii,0,Gruiformes,5529800,12
+Podiceps taczanowskii,0,Podicipediformes,960000,13
+Pinguinus impennis,0,Charadriiformes,11720000,9
+Aramidopsis plateni,0,Gruiformes,12195300,
+Habroptila wallacii,0,Gruiformes,9393700,
+Dryolimnas aldabranus,0,Gruiformes,130000,10
+Podilymbus gigas,0,Podicipediformes,,7
+Podilymbus podiceps,1,Podicipediformes,,7
+Gallirallus philippensis,1,Gruiformes,,8
+Tricholimnas sylvestris,0,Gruiformes,730000,8
+Xenicus longipes,1,Passeriformes,,11
+Gallinula ventralis,1,Gruiformes,,12
+Podiceps occipitalis occipitalis,1,Podicipediformes,,13
