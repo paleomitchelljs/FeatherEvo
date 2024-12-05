@@ -1,0 +1,78 @@
+library(phytools)#
+Store <- getwd()#
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\phy")#
+setwd("~/Dropbox/Research/FeatherEvolution/phy")#
+Tree <- read.tree("fulltree.tre")#
+Tree$tip.label <- gsub("\\_", " ", Tree$tip.label)#
+A <- ape::vcv.phylo(Tree)#
+degreeToRad <- pi / 180#
+setwd("~/Dropbox/Research/FeatherEvolution/data")#
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\data")#
+RawDat <- read.csv("primary.csv")#
+Pairs <- read.csv("sisterpairs.csv")#
+#write.csv(RawDat, "primary.csv", row.names=F)#
+RawDat$wingR <- log(RawDat$wing) - log(RawDat$mass)#
+RawDat$tarsusR <- log(RawDat$tarsus) - log(RawDat$mass)#
+RawDat$tailR <- log(RawDat$tail) - log(RawDat$mass)#
+RawDat$rachisWL <- log(RawDat$rachis_width_m) - log(RawDat$rachis_length_m)#
+RawDat$barbDR <- log(RawDat$barb_density_m_l) - log(RawDat$barb_density_m_t)#
+RawDat$barbLR <- log(RawDat$barb_length_m_l) - log(RawDat$barb_length_m_t)#
+RawDat$barbL_lead <- log(RawDat$barb_length_m_l) - log(RawDat$rachis_width_m) ##
+RawDat$barbL_trail <- log(RawDat$barb_length_m_t) - log(RawDat$rachis_width_m) ##
+RawDat$barbuleL_distrail <- RawDat$barbule_length_m_t / RawDat$rachis_width_m##
+RawDat$mass <- log(RawDat$mass)#
+RawDat$wing <- log(RawDat$wing)#
+RawDat$tarsus <- log(RawDat$tarsus)#
+RawDat$tail <- log(RawDat$tail)#
+# flip flightless/volant for ease of interpreting graphs#
+RawDat$flightless <- rep(0, nrow(RawDat))#
+RawDat$flightless[which(RawDat$flight == 0)] <- 1#
+#colnames(RawDat)[1] <- "species"#
+# Set Mesitornis as flightless since it may as well be#
+Fly <- RawDat$flight#
+Feathers <- RawDat[,11:31]#
+rownames(Feathers) <- RawDat$species#
+Macro <- RawDat[,c("mass","wing","tarsus", "tail")]#
+BaseCors <- cor(Fly, Feathers, use="complete")#
+# Phylo PCA? Set barb angle to 0 instead of NA for Casuaris#
+Scores <- phyl.pca( Tree, Feathers, method = "lambda" )#
+# Adjust A matrix -- UNNECESSARY PER https://discourse.mc-stan.org/t/phylogenetic-signal-in-brms/16457/3#
+#DiagA <- diag(A)#
+#A <- A*Scores$lambda#
+#diag(A) <- DiagA#
+centerscale <- function(x, Scale=F)	{#
+	out <- (x - mean(x, na.rm=T, finite=T))#
+	if (Scale)	{#
+		out <- out / sd(x, na.rm=T)#
+	}#
+	return(out)#
+}#
+########## #
+ModelDat <- RawDat#
+ModelDat[,1] <- RawDat[,2]#
+ModelDat <- ModelDat[,-ncol(ModelDat)]#
+ModelDat[,2] <- RawDat$flightless#
+colnames(ModelDat)[2] <- "flightless"#
+ModelDat[,7:ncol(ModelDat)] <- apply(ModelDat[,7:ncol(ModelDat)], 2, centerscale)#
+ModelDat <- cbind(ModelDat, Scores$S)#
+setwd(Store)#
+######## Create a derived-trait ModelDat variant that looks at log(wing/body) etc ratios and includes asymmetry. Additionally, check pairwise correlations with mass to look for feather traits to adjust#
+######## Install JAGS#
+######## Run the Fuentes model (https://onlinelibrary.wiley.com/doi/am-pdf/10.1111/evo.13899)#
+######## Need to modify Fuentes to allow separate intercepts, too
+Feathers
+library(phytools)#
+Store <- getwd()#
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\phy")#
+setwd("~/Dropbox/Research/FeatherEvolution/phy")#
+Tree <- read.tree("fulltree.tre")#
+Tree$tip.label <- gsub("\\_", " ", Tree$tip.label)#
+A <- ape::vcv.phylo(Tree)#
+degreeToRad <- pi / 180#
+setwd("~/Dropbox/Research/FeatherEvolution/data")#
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\data")#
+RawDat <- read.csv("primary.csv")#
+Pairs <- read.csv("sisterpairs.csv")
+which(RawDat$species == "Casuarius uneppendiculatus")
+grep("Casuar", RawDat$species)
+RawDat[29,]

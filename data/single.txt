@@ -1,0 +1,38 @@
+
+model {
+#Linear regression and multivariate normal likelihood
+  for (i in 1:Ndata) {
+    mu[i] <- beta0 + beta1 * x[i] + beta2 * z[i] + beta3 * xz[i]
+  }
+  y[1:Ndata] ~ dmnorm(mu[],TAU[,])
+  
+#Priors for regression coefficients (betas) and rates (gammas)
+  beta0 ~ dnorm( 0 , 1.0E-06 )
+  beta1 ~ dnorm( 0 , 1.0E-06 )
+  beta2 ~ dnorm( 0 , 1.0E-06 )
+  beta3 ~ dnorm( 0 , 1.0E-06 )
+  sigma ~ dunif( 0 , 100 )
+  gamma <- pow( sigma , 2 )
+
+#Equal vector of probability for tree sampling
+  for (k in 1:Ntree) {
+    p[k] <- 1/Ntree
+  }
+
+#Tree sampling and variance-covariance matrix construction
+  K ~ dcat(p[])
+  PS <- LAMBDA*A[,,K]+(1-LAMBDA)*ID
+  TAU <- inverse(gamma*PS)
+
+# Mixture model:
+  LAMBDA <- lambdaModel[ modelIndex ]
+  lambdaModel[1] <- 0
+  lambdaModel[2] <- 1
+  lambdaModel[3] ~ dunif(0.01,0.99)
+# Hyperprior:
+  modelIndex ~ dcat( modelProb[] )
+  modelProb[1] <- 1/3
+  modelProb[2] <- 1/3
+  modelProb[3] <- 1/3
+}
+

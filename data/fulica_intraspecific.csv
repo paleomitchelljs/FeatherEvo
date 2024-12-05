@@ -1,0 +1,45 @@
+﻿Taxon,"Volant?
+*juveniles fly",ID,Sex,"Wing length: 
+tip of longest primary 
+to wrist (mm)",Wing length divided by best mass estimate of that species,"Position of longest primary 
+from distal wing tip",Longest primary measured's side,"Primary: 
+Middle 
+rachis width 
+(mm)","Primary: 
+Middle 
+rachis length 
+(mm)","Primary: 
+Angle lead barb 
+LM 
+(°)","Primary: 
+Angle trail barb 
+TM
+(°)","Primary: 
+Length lead barb 
+LM
+(mm)","Primary: 
+Length trail barb 
+TM
+(mm)","Primary: 
+Middle 
+leading barb density 
+(#/mm)","Primary: 
+Middle 
+trailing barb density 
+(#/mm)","SCALED
+rachis width","SCALED
+Length lead barb LM","SCALED
+Length trail barb TM","Trail - Lead 
+barb angle","Trail - lead
+barb length","Trail - lead
+barb density"
+Fulica gigantea,N*,FMNH 120551,F,267,0.108757637,3,Right,0.547,21.941,27.33,28.71,10.537,16.642,2.876318313,3.645200486,0.024930495,0.480242468,0.758488674,1.38,6.105,0.768882173
+Fulica gigantea,N*,FMNH 122738 / FNMH 6978,?,277,0.112830957,3,Right,1.123,46.081,26.06,34.84,11.008,19.937,2.487562189,3.10237849,0.024370131,0.238883705,0.432651201,8.78,8.929,0.614816301
+Fulica gigantea,N*,FMNH 12156 / FMNH 4627,M,250,0.101832994,3,Right,1.021,36.645,25.2,31.44,9.857,15.192,2.457002457,3.236245955,0.027861918,0.268986219,0.414572247,6.24,5.335,0.779243498
+Fulica gigantea,N*,FMNH 5479 / FMNH 178818,?,261,0.106313646,3,Left,1.145,43.885,27.53,35.14,10.718,19.974,2.661934339,3.25732899,0.026090919,0.244229236,0.455144127,7.61,9.256,0.595394651
+Fulica gigantea,N*,FMNH 12151 / FMNH 4629,M,251,0.102240326,3,Right,0.99,41.39,27.51,30.93,11.796,18.434,2.59965338,2.879078695,0.023918821,0.284996376,0.445373279,3.42,6.638,0.279425315
+Fulica armillata,Y,FMNH 96799,M,198,0.190384615,2,Left,0.539,26.902,20.13,25.18,11.275,16.951,2.325581395,3.55450237,0.020035685,0.419113821,0.630101851,5.05,5.676,1.228920974
+Fulica armillata,Y,FMNH 2494 / FMNH 666,F,178,0.171153846,2,Right,0.847,38.189,20.31,35.13,10.332,15.352,2.375296912,4.010695187,0.022179162,0.270549111,0.402000576,14.82,5.02,1.635398275
+Fulica armillata,Y,FMNH 120548 / FMNH 14778,F,188,0.180769231,2,Left,0.954,34.519,18.93,32.97,8.833,15.12,2.331002331,3.836317136,0.027636954,0.255888062,0.438019641,14.04,6.287,1.505314805
+Fulica armillata,Y,FMNH 62435,F,191,0.183653846,2,Right,0.951,37.809,20.85,30.22,9.488,15.747,2.754820937,3.792667509,0.025152741,0.250945542,0.416488138,9.37,6.259,1.037846573
+Fulica armillata,Y,FMNH 9851 / FMNH 915,F,201,0.193269231,2,Right,1.172,36.836,19.84,33.89,9.38,16.298,2.551020408,4.081632653,0.031816701,0.254642198,0.442447606,14.05,6.918,1.530612245
