@@ -26,9 +26,17 @@ ff <- function(zz, yy, cost, mm, mo = 1, ms = 1) {
     oo/mo * cost[1] + pp/ms * cost[2]                
 }    
 
+abbreviate <- function(x)	{
+		gen_sp <- lapply(x, function(x) strsplit(x, " ")[[1]])
+		genab_sp <- sapply(lapply(gen_sp, function(x) c(substring(x[1], 1, 1), x[length(x)])), paste, collapse = ". ")
+		return(genab_sp)
+        	
+}
 # x = values vector
-spreadlabels <- function(x, fsize = 0.5, cost=c(1, 0)) {
-        rng <- range(x)
+spreadlabels <- function(x, fsize = 0.85, cost=c(1, 0), rng = NULL) {
+		if (is.null(rng))	{
+        	rng <- range(x)
+        }
         yy <- x
         zz <- setNames((rank(yy, ties.method = "random") - 1)/(length(yy) - 1) * diff(range(yy)) + range(yy)[1], names(yy))      
         mm <- max(fsize * strheight(names(x)))

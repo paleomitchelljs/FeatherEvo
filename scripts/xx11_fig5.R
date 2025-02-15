@@ -1,8 +1,8 @@
 library(phytools)
-#setwd("~/Dropbox/Research/FeatherEvolution/scripts")
-setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\scripts")
+setwd("~/Dropbox/Research/FeatherEvolution/scripts")
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\scripts")
 source("xx00_readFormatDat.R")
-setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\scripts")
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\scripts")
 source("xx01_sisterPairs.R")
 # b0 = intercept
 # b1 = volant slope
@@ -23,10 +23,10 @@ addLine <- function(x1, xint, xb1, xb2, xb3, color=c("red","red"), Lty=1, Lwd=2)
 	segments(Start,yStart2,Stop,yStop2, col=color[2], lty=Lty, lwd=Lwd)
 }
 
-addSis <- function(trait, Xlim=c(-0.5,1.5), Shift=0.2)	{
-	Vloc <- 0.3
-	Lloc <- 0.7
-	Fsize <- 0.5
+addSis <- function(trait, Xlim=c(-2,3), Shift=1.25)	{
+	Vloc <- 0.35
+	Lloc <- 0.65
+	Fsize <- 1
 	Ylim <- range(c(sisMat_vol[,trait],sisMat_less[,trait]), na.rm=T, finite=T)
 
 	#par(las=1, mgp=c(1.5, 0.5, 0), tck=-0.01)
@@ -35,18 +35,18 @@ addSis <- function(trait, Xlim=c(-0.5,1.5), Shift=0.2)	{
 	for (j in 1:Npairs)	{
 		Slope <- sisMat_vol[j,trait] - sisMat_less[j,trait]
 		Col <- ifelse(Slope > 0, "black", "red")
-		segments(Vloc, sisMat_vol[j,trait], Lloc, sisMat_less[j,trait], col=Col, lwd=2)
+		segments(Vloc, sisMat_vol[j,trait], Lloc, sisMat_less[j,trait], col=Col, lwd=1.25)
 	}
 
 	# place volant species tips
-	vY <- spreadlabels(sisMat_vol[,trait], fsize=Fsize)
-	silent <- sapply(1:length(vY), function(x) segments(Vloc, sisMat_vol[x,trait], Vloc-max(Fsize*strheight(rownames(sisMat_vol))), vY[x], col='gray50', lty=3))
-	text(rep(Vloc, nrow(sisMat_vol))-(0.5*Fsize*strheight("a")), vY, rownames(sisMat_vol), cex=Fsize, pos=2, font=3)
+	vY <- spreadlabels(sisMat_vol[,trait], fsize=Fsize, rng = range(c(sisMat_less[,trait], sisMat_vol[,trait])))
+	silent <- sapply(1:length(vY), function(x) segments(Vloc, sisMat_vol[x,trait], Vloc-max(Fsize*strheight(rownames(sisMat_vol))), vY[x], col='gray70', lty=1, lwd=0.5))
+	text(rep(Vloc, nrow(sisMat_vol))-(0.5*Fsize*strheight("a")), vY, abbreviate(rownames(sisMat_vol)), cex=Fsize, pos=2, font=3)
 
 	# place flightless species tips
-	lY <- spreadlabels(sisMat_less[,trait], fsize=Fsize)
-	silent <- sapply(1:length(lY), function(x) segments(Lloc, sisMat_less[x,trait], Lloc+max(Fsize*strheight(rownames(sisMat_less))), lY[x], col='gray50', lty=3))
-	text(rep(Lloc, nrow(sisMat_less))+(0.5*Fsize*strheight("a")), lY, rownames(sisMat_less), cex=Fsize, pos=4, font=3)
+	lY <- spreadlabels(sisMat_less[,trait], fsize=Fsize, rng = range(c(sisMat_less[,trait], sisMat_vol[,trait])))
+	silent <- sapply(1:length(lY), function(x) segments(Lloc, sisMat_less[x,trait], Lloc+max(Fsize*strheight(rownames(sisMat_less))), lY[x], col='gray70', lty=1, lwd=0.5))
+	text(rep(Lloc, nrow(sisMat_less))+(0.5*Fsize*strheight("a")), lY, abbreviate(rownames(sisMat_less)), cex=Fsize, pos=4, font=3)
 
 }
 
@@ -154,7 +154,7 @@ mtext("Barb density ratio (trail / lead)", side = 2, line=par("mgp")[1], cex=Lab
 axis(1, at=c(1, 2), label=Labs)
 axis(2)
 
-addSis("barbDR", Xlim=c(-1,2), Shift=0.5)
+addSis("barbDR")
 mtext("Barb density ratio (trail / lead)", side=2, line=par("mgp")[1], cex=Labcex, las=0)
 mtext("Sister-Taxa\nComparisons", side = 3, line = OMALine, font=2, outer = F, cex = OMACex)
 
@@ -171,7 +171,7 @@ mtext("Barb length ratio (trailing / leading)", side = 2, line=par("mgp")[1], ce
 axis(1, at=c(1, 2), label=Labs)
 axis(2)
 
-addSis("barbLR", Xlim=c(-1,2), Shift=0.5)
+addSis("barbLR")
 mtext("Barb length ratio (trailing / leading)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 
 makeReg(RawDat$barb_length_t, RawDat$barb_length_l, flight = RawDat$flightless, regression = barb_len, Xlab="Trail barb length (mm)", Ylab = "Lead barb length (mm)", labcex = Labcex)
@@ -182,7 +182,8 @@ boxplot(RawDat$barbAng~RawDat$flightless, boxwex=0.25, border=Cols, col="white",
 mtext("Barb angle ratio (trailing / leading)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 axis(1, at=c(1, 2), label=Labs)
 axis(2)
-addSis("barbAng", Xlim=c(-1,2), Shift=0.5)
+
+addSis("barbAng")
 mtext("Barb angle ratio (trailing / leading)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 
 makeReg(RawDat$barb_angle_t, RawDat$barb_angle_l, flight = RawDat$flightless, regression = barb_ang, Xlab="Trail barb angle", Ylab = "Lead barb angle", labcex = Labcex)
@@ -196,7 +197,7 @@ axis(1, at=c(1, 2), label=Labs)
 axis(2)
 
 # placeholder for sister-pair comparison plot
-addSis(3, Xlim=c(-1,2), Shift=0.5)
+addSis("wingR")
 mtext("Relative wing size (wing length / mass)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 
 makeReg(RawDat$mass, RawDat$wing, flight = RawDat$flightless, regression = wing, Xlab="Mass (log g)", Ylab = "Wing length (log mm)", labcex = Labcex)

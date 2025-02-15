@@ -1,6 +1,6 @@
 library(phytools)
 Store <- getwd()
-setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\phy")
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\phy")
 setwd("~/Dropbox/Research/FeatherEvolution/phy")
 
 Tree <- read.tree("fulltree.tre")
@@ -11,7 +11,7 @@ A <- ape::vcv.phylo(Tree)
 degreeToRad <- pi / 180
 
 setwd("~/Dropbox/Research/FeatherEvolution/data")
-setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\data")
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\data")
 
 Pairs <- read.csv("sisterpairs.csv")
 

@@ -1,10 +1,10 @@
 library(phytools)setwd("~/Dropbox/Research/FeatherEvolution/scripts")
-setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\scripts")
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\scripts")
 source("spreadlabels.R")
 source("xx00_readFormatDat.R")
 
 setwd("~/Dropbox/Research/FeatherEvolution/output")
-setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\output")
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\output")
 # Set Mesitornis as flightless since it may as well be
 # specifically check barbule length + rachis width for semiaquatic, barb length in terrestrial365
 
@@ -63,7 +63,7 @@ notsis <- setdiff(Tree$tip.label, Pairs[!is.na(Pairs$pair),1])
 sisterTree <- drop.tip(Tree, notsis)
 
 setwd("~/Dropbox/Research/FeatherEvolution/figures")
-setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\figures")
+#setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\figures")
 pdf("sister_comparisons_alt.pdf", height=4, width=8)
 Vloc <- 0.35
 Lloc <- 0.65
