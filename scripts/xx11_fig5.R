@@ -23,7 +23,7 @@ addLine <- function(x1, xint, xb1, xb2, xb3, color=c("red","red"), Lty=1, Lwd=2)
 	segments(Start,yStart2,Stop,yStop2, col=color[2], lty=Lty, lwd=Lwd)
 }
 
-addSis <- function(trait, Xlim=c(-3,4), Shift=2)	{
+addSis_old <- function(trait, Xlim=c(-3,4), Shift=2)	{
 	Vloc <- -1
 	Lloc <- 1
 	Fsize <- 0.8
@@ -32,9 +32,11 @@ addSis <- function(trait, Xlim=c(-3,4), Shift=2)	{
 	#par(las=1, mgp=c(1.5, 0.5, 0), tck=-0.01)
 	plot(1, 1, type="n", xaxt="n", ylim=Ylim, xlim=Xlim, xlab="", ylab="")
 	axis(1, at=c(Vloc-Shift*Vloc, Lloc+Shift*Lloc), labels=c("Vol.","Nonvol."))
+	Npairs <- max(sisMat_vol[,1])
+	Slope <- c()
 	for (j in 1:Npairs)	{
-		Slope <- sisMat_vol[j,trait] - sisMat_less[j,trait]
-		Col <- ifelse(Slope > 0, "black", "red")
+		Slope[j] <- sisMat_vol[j,trait] - sisMat_less[j,trait]
+		Col <- ifelse(Slope[j] > 0, "black", "red")
 		segments(Vloc, sisMat_vol[j,trait], Lloc, sisMat_less[j,trait], col=Col, lwd=1.25)
 	}
 
@@ -50,6 +52,32 @@ addSis <- function(trait, Xlim=c(-3,4), Shift=2)	{
 
 }
 
+
+addSis <- function(trait, Xlim=c(-1.25,2), Shift=1, Xlab1=-1, Xlab2=0.5, addLabs = TRUE, xshift = 0.1)	{
+	Vloc <- -1
+	Lloc <- 0.5
+	Fsize <- 0.75
+	Ylim <- range(c(sisMat_vol[,trait],sisMat_less[,trait]), na.rm=T, finite=T)
+
+	#par(las=1, mgp=c(1.5, 0.5, 0), tck=-0.01)
+	plot(1, 1, type="n", xaxt="n", ylim=Ylim, xlim=Xlim, xlab="", ylab="", bty="l")
+	axis(1, at=c(Xlab1, Xlab2), labels=c("Vol.","Nonvol."))
+	Slope <- c()
+	Col <- c()
+	for (j in 1:nrow(sisMat_vol))	{
+		Slope[j] <- sisMat_vol[j,trait] - sisMat_less[j,trait]
+		Col[j] <- ifelse(Slope[j] > 0, "black", "red")
+		segments(Vloc, sisMat_vol[j,trait], Lloc, sisMat_less[j,trait], col=Col[j], lwd=1.25)
+	}
+
+	if (addLabs)	{
+	# place flightless species labels
+		lY <- spreadlabels(sisMat_less[,trait], fsize=Fsize, rng = range(c(sisMat_less[,trait], sisMat_vol[,trait])))
+		silent <- sapply(1:nrow(sisMat_less), function(x) segments(Lloc, sisMat_less[x,trait], Lloc+max(Fsize*strheight(rownames(sisMat_less))), lY[x], col='gray70', lty=1, lwd=0.5))
+		text(rep(Lloc, nrow(sisMat_less))+(0.2*Fsize*strheight("a")), lY, abbreviate(rownames(sisMat_less)), cex=Fsize, pos=4, font=3, xpd=NA, col=Col)
+#		text(rep(Lloc, nrow(sisMat_less))+(0.5*Fsize*strheight("a")), lY, sapply(rownames(sisMat_less), function(x) strsplit(x, " ")[[1]][1]), cex=Fsize, pos=4, font=3, xpd=NA, col = Col)
+	}
+}
 
 makeReg <- function(x, y, flight, regression, Ndraw = 1e2, Xlab="", Ylab="", Xline = 1.5, Yline = 2, labcex = 1, legLoc = "topleft")	{
 	Opac <- 10 / Ndraw
@@ -136,51 +164,11 @@ length(which(BDR > 0)) / length(BDR)
 mean(BDR)
 mean(barb_dens$lam)
 
-
-
-
-
-
-
-
-
-addSis <- function(trait, Xlim=c(-1.25,2), Shift=1, Xlab1=-0.25, Xlab2=1.25, addLabs = TRUE, xshift = 0.1)	{
-	Vloc <- 0.1
-	Lloc <- 0.9
-	Fsize <- 0.5
-	Ylim <- range(c(sisMat_vol[,trait],sisMat_less[,trait]), na.rm=T, finite=T)
-
-	#par(las=1, mgp=c(1.5, 0.5, 0), tck=-0.01)
-	plot(1, 1, type="n", xaxt="n", ylim=Ylim, xlim=Xlim, xlab="", ylab="", bty="l")
-	axis(1, at=c(Xlab1, Xlab2), labels=c("Vol.","Nonvol."))
-	for (j in 1:Npairs)	{
-		Slope <- sisMat_vol[j,trait] - sisMat_less[j,trait]
-		Col <- ifelse(Slope > 0, "black", "red")
-		segments(Vloc, sisMat_vol[j,trait], Lloc, sisMat_less[j,trait], col=Col, lwd=1.25)
-	}
-
-	if (addLabs)	{
-	# place volant species tips
-		vY <- spreadlabels(sisMat_vol[,trait], fsize=Fsize, rng = range(c(sisMat_less[,trait], sisMat_vol[,trait])))
-		silent <- sapply(1:length(vY), function(x) segments(Vloc, sisMat_vol[x,trait], Vloc-max(Fsize*strheight(rownames(sisMat_vol))), vY[x], col='gray70', lty=1, lwd=0.5))
-		text(rep(Vloc, nrow(sisMat_vol))-(0.2*Fsize*strheight("a")), vY, abbreviate(rownames(sisMat_vol)), cex=Fsize, pos=2, font=3, xpd=NA)
-		#text(rep(Vloc, nrow(sisMat_vol))-(0.5*Fsize*strheight("a")), vY, sapply(rownames(sisMat_vol), function(x) strsplit(x, " ")[[1]][1]), cex=Fsize, pos=2, font=3, xpd=NA)
-	
-	# place flightless species tips
-		lY <- spreadlabels(sisMat_less[,trait], fsize=Fsize, rng = range(c(sisMat_less[,trait], sisMat_vol[,trait])))
-		silent <- sapply(1:length(lY), function(x) segments(Lloc, sisMat_less[x,trait], Lloc+max(Fsize*strheight(rownames(sisMat_less))), lY[x], col='gray70', lty=1, lwd=0.5))
-		text(rep(Lloc, nrow(sisMat_less))+(0.2*Fsize*strheight("a")), lY, abbreviate(rownames(sisMat_less)), cex=Fsize, pos=4, font=3, xpd=NA)
-		#text(rep(Lloc, nrow(sisMat_less))+(0.5*Fsize*strheight("a")), lY, sapply(rownames(sisMat_less), function(x) strsplit(x, " ")[[1]][1]), cex=Fsize, pos=4, font=3, xpd=NA)
-	}
-}
-
-
-
 ## Make the plot
 setwd("~/Dropbox/Research/FeatherEvolution/figures")
 setwd("C:\\Users\\jonsm\\Dropbox\\Research\\FeatherEvolution\\figures")
 
-pdf("Fig5_sislabs.pdf", height=6.65, width=6.65)
+pdf("Fig5_sislabs_onlyPos.pdf", height=6.65, width=6.65)
 par(mfrow=c(4,4), mar=c(3,4,0.5,0.5), mgp=c(2,0.35,0), tck=-0.01, las=1, oma=c(0, 0, 4, 0))
 Ndraw <- 1e2
 Opac <- 10 / Ndraw
