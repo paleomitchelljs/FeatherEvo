@@ -33,7 +33,7 @@ RawDat$rachisWL <- log(RawDat$rachis_width) - log(RawDat$rachis_length)
 RawDat$barbDR <- log(RawDat$barb_density_t) - log(RawDat$barb_density_l)
 RawDat$barbLR <- log(RawDat$barb_length_t) - log(RawDat$barb_length_l)
 
-RawDat$barbAng <- RawDat$barb_angle_t - RawDat$barb_angle_l # Feo et al 2015
+RawDat$barbAng <- log(RawDat$barb_angle_t) - log(RawDat$barb_angle_l) # Feo et al 2015
 
 RawDat$barbL_lead <- log(RawDat$barb_length_l) - log(RawDat$rachis_length) #
 RawDat$barbL_trail <- log(RawDat$barb_length_t) - log(RawDat$rachis_length) #
