@@ -180,12 +180,12 @@ OMACex <- 1
 OMALine <- 1
 boxplot(ModelDat$barbDR~ModelDat$flightless, boxwex=0.25, border=Cols, col="white", lty=1, ylab="", xlab="", xaxt="n", yaxt="n", lwd=LWD, bty='l')
 mtext("Direct Comparisons", side = 3, line = OMALine, font=2, outer = F, cex = OMACex)
-mtext("Barb density ratio (t/l)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
+mtext("log Barb dens ratio (t/l)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 axis(1, at=c(1, 2), label=Labs)
 axis(2)
 
 addSis("barbDR")
-mtext("Barb density ratio (t/l)", side=2, line=par("mgp")[1], cex=Labcex, las=0)
+mtext("log Barb dens ratio (t/l)", side=2, line=par("mgp")[1], cex=Labcex, las=0)
 mtext("Sister-Taxa\nComparisons", side = 3, line = OMALine, font=2, outer = F, cex = OMACex)
 
 makeReg(RawDat$barb_density_t, RawDat$barb_density_l, flight = RawDat$flightless, regression = barb_dens, Xlab="Trail barb density (#/mm)", Ylab = "Lead barb density (#/mm)", labcex = Labcex, legLoc=c(2, 4))
@@ -197,19 +197,19 @@ mtext("Rate\nComparisons", side = 3, line = OMALine, font=2, outer = F, cex = OM
 
 ### Barb LR
 boxplot(ModelDat$barbLR~ModelDat$flightless, boxwex=0.25, border=Cols, col="white", lty=1, ylab="", xlab="", xaxt="n", yaxt="n", lwd=LWD, bty='l')
-mtext("Barb length ratio (t/l)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
+mtext("log Barb len. ratio (t/l)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 axis(1, at=c(1, 2), label=Labs)
 axis(2)
 
 addSis("barbLR")
-mtext("Barb length ratio (t/l)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
+mtext("log Barb len. ratio (t/l)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 
 makeReg(RawDat$barb_length_t, RawDat$barb_length_l, flight = RawDat$flightless, regression = barb_len, Xlab="Trail barb length (mm)", Ylab = "Lead barb length (mm)", labcex = Labcex, legLoc = c(10, 100))
 makeHist(barb_len, Xlab = expression(paste("log est. rate (", gamma, ")", sep="")), Ylab = "Proportion", labcex = Labcex)
 
 ### Barb Angle
 boxplot(ModelDat$barbAng~ModelDat$flightless, boxwex=0.25, border=Cols, col="white", lty=1, ylab="", xlab="", xaxt="n", yaxt="n", lwd=LWD, bty='l')
-mtext("Barb angle ratio (t/l)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
+mtext("log Barb angle ratio (t/l)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 axis(1, at=c(1, 2), label=Labs)
 axis(2)
 
@@ -222,15 +222,15 @@ makeHist(barb_ang, Xlab = expression(paste("log est. rate (", gamma, ")", sep=""
 
 ### Wing
 boxplot(RawDat$wingR~RawDat$flightless, boxwex=0.25, border=Cols, col="white", lty=1, ylab="", xlab="", xaxt="n", yaxt="n", lwd=LWD, bty='l')
-mtext("Rel. wing size (length/mass)", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
+mtext("log Wing len. : Body mass", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 axis(1, at=c(1, 2), label=Labs)
 axis(2)
 
 # placeholder for sister-pair comparison plot
 addSis("wingR")
-mtext("Wing:Mass", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
+mtext("log Wing:Mass", side = 2, line=par("mgp")[1], cex=Labcex, las=0)
 
-makeReg(RawDat$mass, RawDat$wing, flight = RawDat$flightless, regression = wing, Xlab="Mass (log g)", Ylab = "Wing length (log mm)", labcex = Labcex, legLoc = c(3, 7.5))
+makeReg(RawDat$mass, RawDat$wing, flight = RawDat$flightless, regression = wing, Xlab="Mass (log g)", Ylab = "Wing len. (log mm)", labcex = Labcex, legLoc = c(3, 7.5))
 makeHist(wing, Xlab = expression(paste("log est. rate (", gamma, ")", sep="")), Ylab = "Proportion", labcex = Labcex)
 
 dev.off()
